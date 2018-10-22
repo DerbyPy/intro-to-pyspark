@@ -1,8 +1,16 @@
 from operator import add
-from pyspark import SparkContext
+from pyspark import SparkContext, SparkConf
 
 if __name__ == "__main__":
-    sc = SparkContext(appName="word_count")
+    SPARK_MASTER = "local[*]"
+ 
+    sparkConf = SparkConf().setAll([("spark.cores.max", "4"),
+                                    ("spark.executor.memory", "2G"),
+                                    ("spark.ui.port", "4041")
+                                   ]).setMaster(SPARK_MASTER) \
+                                     .setAppName("word_count")
+
+    sc = SparkContext(conf=sparkConf)
 
     lines = sc.textFile("./data/so-developer-survey-2017/README_2017.txt")
 
