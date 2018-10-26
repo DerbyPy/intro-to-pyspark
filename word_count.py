@@ -3,7 +3,7 @@ from pyspark import SparkContext, SparkConf
 
 if __name__ == "__main__":
     SPARK_MASTER = "local[*]"
- 
+
     sparkConf = SparkConf().setAll([("spark.cores.max", "4"),
                                     ("spark.executor.memory", "2G"),
                                     ("spark.ui.port", "4041")
